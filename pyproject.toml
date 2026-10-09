@@ -9,3 +9,8 @@ dependencies = [
     "numpy",
     "pillow"
 ]
+
+[tool.uv]
+required-environments = [
+	"sys_platform == 'darwin' and platform_machine == 'arm64'"
+]

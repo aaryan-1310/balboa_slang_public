@@ -11,6 +11,13 @@ void compute_main(uint2 tid : SV_DispatchThreadID,
         return;
     }
 
-    image[tid] = float4(1.0);
+    image[tid] = float4(0.5, 0.5, 0.5, 1.0);
     // TODO: your code here
+	center.y = height - center.y;	// bc shader codes y top to bottom
+    float dist_x = abs(center.x - (tid.x + 0.5));
+    float dist_y = abs(center.y - (tid.y + 0.5));
+    float dist = sqrt( (dist_x * dist_x) + (dist_y * dist_y) );
+    if (dist <= radius) {
+        image[tid] = float4(color, 1.0);
+    }
 }
